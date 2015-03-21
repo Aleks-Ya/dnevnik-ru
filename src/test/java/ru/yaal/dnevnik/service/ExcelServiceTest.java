@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.yaal.dnevnik.domain.ExcelEntity;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -16,16 +16,15 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ExcelServiceTest {
 
-    @Autowired
-    private EntityManagerFactory emf;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private ExcelService service;
 
-    @Test(expected = NullPointerException.class)
-    public void testProcessExcelFile() throws Exception {
+    @Test
+    public void testProcessExcelFile() {
         service.processExcelFile(null);
-        EntityManager em = emf.createEntityManager();
         ExcelEntity entity = em.find(ExcelEntity.class, 1);
         assertNotNull(entity);
     }

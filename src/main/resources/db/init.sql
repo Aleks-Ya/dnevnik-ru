@@ -1,8 +1,8 @@
 CREATE TABLE excel(
   id INTEGER PRIMARY KEY,
   code INTEGER,
-  "name" VARCHAR(255),
+  name VARCHAR(255),
   price FLOAT,
-  "date" TIMESTAMP
+  date TIMESTAMP
 );
 CREATE SEQUENCE id_seq START WITH 1;
