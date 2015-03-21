@@ -7,6 +7,13 @@
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
+    <developers>
+        <developer>
+            <name>Yablokov Aleksey</name>
+            <email>ya_al@bk.ru</email>
+        </developer>
+    </developers>
+
     <properties>
         <java.version>1.7</java.version>
 
