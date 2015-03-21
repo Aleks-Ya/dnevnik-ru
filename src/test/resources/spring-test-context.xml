@@ -5,7 +5,7 @@
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath:db/db.properties"/>
+    <context:property-placeholder location="classpath:db-test.properties"/>
 
     <context:annotation-config/>
     <context:component-scan base-package="ru.yaal.dnevnik"/>
@@ -14,7 +14,7 @@
         <jdbc:script location="classpath:db/init.sql"/>
     </jdbc:embedded-database>
 
-    <bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="ru.yaal.dnevnik.domain"/>
         <property name="jpaVendorAdapter">
@@ -30,7 +30,7 @@
 
     <tx:annotation-driven/>
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="myEmf"/>
+        <property name="entityManagerFactory" ref="emf"/>
     </bean>
 
 </beans>
