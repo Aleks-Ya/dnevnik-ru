@@ -9,8 +9,10 @@ import ru.yaal.dnevnik.domain.ExcelEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.InputStream;
+import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 @ContextConfiguration("classpath:spring-test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,9 +25,14 @@ public class ExcelServiceTest {
     private ExcelService service;
 
     @Test
-    public void testProcessExcelFile() {
-        service.processExcelFile(null);
-        ExcelEntity entity = em.find(ExcelEntity.class, 1);
-        assertNotNull(entity);
+    public void xlsx() throws ServiceException {
+        String filename = "Right-XLSX.xlsx";
+        InputStream is = ExcelService.class.getResourceAsStream("../../../../" + filename);
+        service.processExcelFile(is, filename);
+        List<ExcelEntity> actual = em.createQuery(
+                "SELECT e FROM ExcelEntity e", ExcelEntity.class)
+                .getResultList();
+
+        assertEquals(TestData.RIGHT_ENTITIES_WITH_ID, actual);
     }
 }

@@ -10,7 +10,22 @@ import java.util.Date;
 
 @Entity
 @Table(name = "excel")
-public class ExcelEntity {
+public class ExcelEntity implements Cloneable {
+
+    public ExcelEntity() {
+    }
+
+    public ExcelEntity(Integer id, Integer code, String name, Double price, Date date) {
+        this(code, name, price, date);
+        this.id = id;
+    }
+
+    public ExcelEntity(Integer code, String name, Double price, Date date) {
+        this.code = code;
+        this.name = name;
+        this.price = price;
+        this.date = date;
+    }
 
     @Id
     @SequenceGenerator(name = "id_seq", sequenceName = "id_seq", allocationSize = 1)
@@ -21,7 +36,7 @@ public class ExcelEntity {
 
     private String name;
 
-    private Float price;
+    private Double price;
 
     private Date date;
 
@@ -49,11 +64,11 @@ public class ExcelEntity {
         this.name = name;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -63,5 +78,42 @@ public class ExcelEntity {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ExcelEntity entity = (ExcelEntity) o;
+
+        if (!code.equals(entity.code)) return false;
+        if (!date.equals(entity.date)) return false;
+        if (id != null ? !id.equals(entity.id) : entity.id != null) return false;
+        if (!name.equals(entity.name)) return false;
+        if (!price.equals(entity.price)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + code.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + price.hashCode();
+        result = 31 * result + date.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ExcelEntity{" +
+                "id=" + id +
+                ", code=" + code +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", date=" + date +
+                '}';
     }
 }

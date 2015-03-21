@@ -29,6 +29,6 @@ public class UploadServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getParts();
+        
     }
 }
