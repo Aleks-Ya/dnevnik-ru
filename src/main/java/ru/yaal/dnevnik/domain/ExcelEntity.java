@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "excel")
-public class ExcelEntity implements Cloneable {
+public class ExcelEntity {
 
     public ExcelEntity() {
     }
@@ -84,15 +84,12 @@ public class ExcelEntity implements Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         ExcelEntity entity = (ExcelEntity) o;
-
         if (!code.equals(entity.code)) return false;
         if (!date.equals(entity.date)) return false;
         if (id != null ? !id.equals(entity.id) : entity.id != null) return false;
         if (!name.equals(entity.name)) return false;
         if (!price.equals(entity.price)) return false;
-
         return true;
     }
 
