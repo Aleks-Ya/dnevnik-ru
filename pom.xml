@@ -40,7 +40,7 @@
     </properties>
 
     <build>
-        <finalName>dnevnik-yablokov</finalName>
+        <finalName>dnevnik</finalName>
         <defaultGoal>package</defaultGoal>
         <plugins>
             <plugin>
