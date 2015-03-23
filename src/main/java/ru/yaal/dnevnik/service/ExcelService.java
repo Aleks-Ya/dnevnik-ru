@@ -22,6 +22,8 @@ public class ExcelService {
     @Autowired
     private ExcelParser parser;
 
+    final Object lock = new Object();
+
     @Transactional
     public int processExcelFile(InputStream excel, String filename) throws ServiceException {
         List<ExcelEntity> entities;
@@ -47,10 +49,12 @@ public class ExcelService {
         }
 
         try {
-            for (ExcelEntity entity : entities) {
-                em.persist(entity);
+            synchronized (lock) {
+                for (ExcelEntity entity : entities) {
+                    em.persist(entity);
+                }
+                em.flush();
             }
-            em.flush();
             return entities.size();
         } catch (Exception e) {
             throw new ServiceException("Ошибка сохранения информации в БД", e);
