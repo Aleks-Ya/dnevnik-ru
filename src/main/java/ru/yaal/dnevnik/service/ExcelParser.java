@@ -31,16 +31,20 @@ public class ExcelParser {
 
             if (!isHeaderRow(row)) {
                 if (code.getCellType() != Cell.CELL_TYPE_NUMERIC) {
-                    throw new ServiceException("Expect number type: row=%d, column=%d", row, CODE_COLUMN);
+                    throw new ServiceException(
+                            "В ячейке ожидается число: строка=%d, столбец=%d", row, CODE_COLUMN);
                 }
                 if (name.getCellType() != Cell.CELL_TYPE_STRING) {
-                    throw new ServiceException("Expect string type: row=%d, column=%d", row, NAME_COLUMN);
+                    throw new ServiceException(
+                            "В ячейке ожидается строка: строка=%d, столбец=%d", row, NAME_COLUMN);
                 }
                 if (price.getCellType() != Cell.CELL_TYPE_NUMERIC) {
-                    throw new ServiceException("Expect number type: row=%d, column=%d", row, PRICE_COLUMN);
+                    throw new ServiceException(
+                            "В ячейке ожидается число: строка=%d, столбец=%d", row, PRICE_COLUMN);
                 }
                 if (date.getCellType() != Cell.CELL_TYPE_NUMERIC) {
-                    throw new ServiceException("Expect date type: row=%d, column=%d", row, DATE_COLUMN);
+                    throw new ServiceException(
+                            "В ячейке ожидается дата: строка=%d, столбец=%d", row, DATE_COLUMN);
                 }
             }
 

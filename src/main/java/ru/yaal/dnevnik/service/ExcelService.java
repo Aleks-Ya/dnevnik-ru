@@ -23,7 +23,7 @@ public class ExcelService {
     private ExcelParser parser;
 
     @Transactional
-    public void processExcelFile(InputStream excel, String filename) throws ServiceException {
+    public int processExcelFile(InputStream excel, String filename) throws ServiceException {
         List<ExcelEntity> entities;
         try {
             String ext = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
@@ -39,11 +39,11 @@ public class ExcelService {
                     break;
                 }
                 default: {
-                    throw new ServiceException("Unsupported file format: %s", ext);
+                    throw new ServiceException("Формат файлов не поддерживается: %s", ext);
                 }
             }
         } catch (Exception e) {
-            throw new ServiceException("Parse Excel file exception", e);
+            throw new ServiceException(e.getMessage(), e);
         }
 
         try {
@@ -51,8 +51,9 @@ public class ExcelService {
                 em.persist(entity);
             }
             em.flush();
+            return entities.size();
         } catch (Exception e) {
-            throw new ServiceException("Save entities to database exception", e);
+            throw new ServiceException("Ошибка сохранения информации в БД", e);
         }
     }
 }

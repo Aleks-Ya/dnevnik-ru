@@ -34,9 +34,11 @@ public class UploadServlet extends HttpServlet {
         try {
             Part part = req.getPart("filename");
             String filename = getFileName(part);
-            service.processExcelFile(part.getInputStream(), filename);
+            int entityCount = service.processExcelFile(part.getInputStream(), filename);
+            req.setAttribute("entityCount", entityCount);
+            req.getRequestDispatcher("/success.jsp").forward(req, resp);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            resp.sendError(500, e.getMessage());
         }
     }
 
