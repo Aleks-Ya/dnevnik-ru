@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Data base content</title>
@@ -21,8 +22,18 @@
                     <td>${row.id}</td>
                     <td>${row.code}</td>
                     <td>${row.name}</td>
-                    <td>${row.price}</td>
-                    <td>${row.date}</td>
+                    <fmt:setLocale value="ru_Ru" />
+                    <td><fmt:formatNumber type="currency"
+                                          groupingUsed="false"
+                                          value="${row.price}"
+                                          maxFractionDigits="2"
+                                          minFractionDigits="2"/>
+                    </td>
+                    <td><fmt:formatDate value="${row.date}"
+                                        type="both"
+                                        dateStyle="medium"
+                                        timeStyle="medium"/>
+                    </td>
                 </tr>
             </c:forEach>
         </c:when>
