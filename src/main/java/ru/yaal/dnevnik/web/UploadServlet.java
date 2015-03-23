@@ -1,4 +1,4 @@
-package ru.yaal.dnevnik;
+package ru.yaal.dnevnik.web;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
@@ -42,7 +42,6 @@ public class UploadServlet extends HttpServlet {
 
     private String getFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
-        System.out.println("content-disposition header= " + contentDisp);
         String[] tokens = contentDisp.split(";");
         for (String token : tokens) {
             if (token.trim().startsWith("filename")) {
